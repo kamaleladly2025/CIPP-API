@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-RemoveGroupTemplate {
     <#
     .FUNCTIONALITY
@@ -34,7 +32,6 @@ Function Invoke-RemoveGroupTemplate {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

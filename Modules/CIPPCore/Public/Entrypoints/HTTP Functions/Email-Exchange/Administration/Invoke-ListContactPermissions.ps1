@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListContactPermissions {
     <#
     .FUNCTIONALITY
@@ -11,9 +9,6 @@ Function Invoke-ListContactPermissions {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $UserID = $Request.Query.UserID
     $TenantFilter = $Request.Query.tenantFilter
 
@@ -32,7 +27,6 @@ Function Invoke-ListContactPermissions {
         $GraphRequest = $ErrorMessage
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($GraphRequest)

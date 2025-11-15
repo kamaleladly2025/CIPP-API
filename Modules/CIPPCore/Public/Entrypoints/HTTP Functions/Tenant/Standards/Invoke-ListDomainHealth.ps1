@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListDomainHealth {
     <#
     .FUNCTIONALITY
@@ -11,9 +9,6 @@ function Invoke-ListDomainHealth {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     Import-Module DNSHealth
 
     try {
@@ -42,9 +37,6 @@ function Invoke-ListDomainHealth {
     $UserRoles = Get-CIPPAccessRole -Request $Request
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
 
 
     $StatusCode = [HttpStatusCode]::OK
@@ -152,7 +144,6 @@ function Invoke-ListDomainHealth {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $body

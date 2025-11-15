@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecStandardConvert {
     <#
     .FUNCTIONALITY
@@ -231,7 +229,6 @@ function Invoke-ExecStandardConvert {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = 'Successfully converted legacy standards to new format'

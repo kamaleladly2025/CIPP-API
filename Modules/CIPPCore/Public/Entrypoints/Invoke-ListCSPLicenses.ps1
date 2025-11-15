@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListCSPLicenses {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ function Invoke-ListCSPLicenses {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $TenantFilter = $Request.Query.tenantFilter
 
@@ -25,7 +18,6 @@ function Invoke-ListCSPLicenses {
         $StatusCode = [HttpStatusCode]::BadRequest
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return [HttpResponseContext]@{
         StatusCode = $StatusCode
         Body       = @($Result)

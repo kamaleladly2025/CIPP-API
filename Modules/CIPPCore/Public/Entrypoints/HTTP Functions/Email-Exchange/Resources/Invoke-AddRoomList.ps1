@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddRoomList {
     <#
     .FUNCTIONALITY
@@ -49,7 +47,6 @@ Function Invoke-AddRoomList {
     }
 
     $Body = [pscustomobject] @{ 'Results' = @($Results) }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $Body

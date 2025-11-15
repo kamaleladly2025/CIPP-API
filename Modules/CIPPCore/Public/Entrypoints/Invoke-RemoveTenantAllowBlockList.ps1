@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-RemoveTenantAllowBlockList {
     <#
     .FUNCTIONALITY
@@ -44,7 +42,6 @@ function Invoke-RemoveTenantAllowBlockList {
         $StatusCode = [HttpStatusCode]::Forbidden
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{

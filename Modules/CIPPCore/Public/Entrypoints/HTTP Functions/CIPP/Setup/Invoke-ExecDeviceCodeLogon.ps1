@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecDeviceCodeLogon {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ function Invoke-ExecDeviceCodeLogon {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     try {
         $clientId = $Request.Query.clientId
         $scope = $Request.Query.scope
@@ -60,7 +53,6 @@ function Invoke-ExecDeviceCodeLogon {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Results | ConvertTo-Json

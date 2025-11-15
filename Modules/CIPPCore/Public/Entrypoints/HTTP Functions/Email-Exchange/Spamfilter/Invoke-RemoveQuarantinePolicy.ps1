@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-RemoveQuarantinePolicy {
     <#
     .FUNCTIONALITY
@@ -36,7 +34,6 @@ Function Invoke-RemoveQuarantinePolicy {
 
     $StatusCode = [HttpStatusCode]::OK
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{Results = $Result }

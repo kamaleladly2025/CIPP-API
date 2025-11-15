@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListExchangeConnectors {
     <#
     .FUNCTIONALITY
@@ -9,10 +7,6 @@ function Invoke-ListExchangeConnectors {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
     $TenantFilter = $request.Query.tenantFilter
 
     $Results = try {
@@ -25,7 +19,6 @@ function Invoke-ListExchangeConnectors {
         $ErrorMessage
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($Results)

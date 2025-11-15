@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddSharedMailbox {
     <#
     .FUNCTIONALITY
@@ -73,7 +71,6 @@ function Invoke-AddSharedMailbox {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ Results = @($Results) }

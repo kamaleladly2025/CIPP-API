@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecEditMailboxPermissions {
     <#
     .FUNCTIONALITY
@@ -110,7 +108,6 @@ Function Invoke-ExecEditMailboxPermissions {
 
     $body = [pscustomobject]@{'Results' = @($results) }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Body

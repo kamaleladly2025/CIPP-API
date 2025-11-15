@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListIntuneIntents {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListIntuneIntents {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $TenantFilter = $Request.Query.tenantFilter
 
@@ -26,7 +19,6 @@ Function Invoke-ListIntuneIntents {
         $GraphRequest = $ErrorMessage
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return [HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($GraphRequest)

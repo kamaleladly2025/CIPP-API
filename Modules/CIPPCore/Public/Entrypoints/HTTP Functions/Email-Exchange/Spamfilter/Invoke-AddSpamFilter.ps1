@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddSpamFilter {
     <#
     .FUNCTIONALITY
@@ -40,7 +38,6 @@ Function Invoke-AddSpamFilter {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @{Results = @($Result) }

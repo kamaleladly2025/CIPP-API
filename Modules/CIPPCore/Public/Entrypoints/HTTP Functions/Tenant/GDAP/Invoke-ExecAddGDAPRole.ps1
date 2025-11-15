@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecAddGDAPRole {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ function Invoke-ExecAddGDAPRole {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $Action = $Request.Body.Action ?? $Request.Query.Action ?? 'AddRoleSimple'
     $GroupBlockList = @('All Users', 'AdminAgents', 'HelpdeskAgents', 'SalesAgents')
 
@@ -174,7 +167,6 @@ function Invoke-ExecAddGDAPRole {
     }
 
     $body = @{Results = @($Results) }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $body

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecCAExclusion {
     <#
     .FUNCTIONALITY
@@ -9,8 +7,6 @@ function Invoke-ExecCAExclusion {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
     try {

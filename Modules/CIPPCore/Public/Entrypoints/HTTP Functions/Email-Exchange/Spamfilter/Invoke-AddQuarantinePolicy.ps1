@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddQuarantinePolicy {
     <#
     .FUNCTIONALITY
@@ -58,7 +56,6 @@ Function Invoke-AddQuarantinePolicy {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @{Results = @($Result) }

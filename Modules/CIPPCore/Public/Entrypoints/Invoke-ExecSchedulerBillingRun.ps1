@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecSchedulerBillingRun {
     <#
     .FUNCTIONALITY
@@ -9,8 +7,6 @@ Function Invoke-ExecSchedulerBillingRun {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
 

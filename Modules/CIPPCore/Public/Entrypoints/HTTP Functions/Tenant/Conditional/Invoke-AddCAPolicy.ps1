@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddCAPolicy {
     <#
     .FUNCTIONALITY
@@ -30,7 +28,6 @@ function Invoke-AddCAPolicy {
 
     $body = [pscustomobject]@{'Results' = @($results) }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $body

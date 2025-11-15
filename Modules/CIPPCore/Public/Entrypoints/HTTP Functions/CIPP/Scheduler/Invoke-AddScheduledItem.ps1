@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddScheduledItem {
     <#
     .FUNCTIONALITY
@@ -31,7 +29,14 @@ function Invoke-AddScheduledItem {
             $Result = "Error scheduling task: $($_.Exception.Message)"
         }
     } else {
-        $Result = Add-CIPPScheduledTask -Task $Request.Body -Headers $Request.Headers -hidden $hidden -DisallowDuplicateName $Request.Query.DisallowDuplicateName -DesiredStartTime $Request.Body.DesiredStartTime
+        $ScheduledTask = @{
+            Task                  = $Request.Body
+            Headers               = $Request.Headers
+            hidden                = $hidden
+            DisallowDuplicateName = $Request.Query.DisallowDuplicateName
+            DesiredStartTime      = $Request.Body.DesiredStartTime
+        }
+        $Result = Add-CIPPScheduledTask @ScheduledTask
         Write-LogMessage -headers $Request.Headers -API $APINAME -message $Result -Sev 'Info'
     }
     return ([HttpResponseContext]@{

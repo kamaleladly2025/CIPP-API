@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecSetSharePointMember {
     <#
     .FUNCTIONALITY
@@ -9,9 +7,6 @@ function Invoke-ExecSetSharePointMember {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
 
@@ -43,7 +38,6 @@ function Invoke-ExecSetSharePointMember {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ 'Results' = $Results }

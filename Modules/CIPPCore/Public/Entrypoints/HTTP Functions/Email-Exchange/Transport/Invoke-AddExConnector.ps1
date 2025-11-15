@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddExConnector {
     <#
     .FUNCTIONALITY
@@ -40,7 +38,6 @@ function Invoke-AddExConnector {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @{Results = @($Result) }

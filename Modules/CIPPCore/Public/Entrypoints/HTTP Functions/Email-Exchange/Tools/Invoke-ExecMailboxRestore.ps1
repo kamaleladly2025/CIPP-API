@@ -6,45 +6,43 @@ function Invoke-ExecMailboxRestore {
         Exchange.Mailbox.ReadWrite
     #>
     Param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     try {
-        switch ($Request.Query.Action) {
+        $Action = $Request.Query.Action ?? $Request.Body.Action
+        $Identity = $Request.Query.Identity ?? $Request.Body.Identity
+        $TenantFilter = $Request.Query.TenantFilter ?? $Request.Body.TenantFilter
+
+        switch ($Action) {
             'Remove' {
                 $ExoRequest = @{
-                    tenantid  = $Request.Query.TenantFilter
+                    tenantid  = $TenantFilter
                     cmdlet    = 'Remove-MailboxRestoreRequest'
                     cmdParams = @{
-                        Identity = $Request.Query.Identity
+                        Identity = $Identity
                     }
                 }
                 $SuccessMessage = 'Mailbox restore request removed successfully'
             }
             'Resume' {
                 $ExoRequest = @{
-                    tenantid  = $Request.Query.TenantFilter
+                    tenantid  = $TenantFilter
                     cmdlet    = 'Resume-MailboxRestoreRequest'
                     cmdParams = @{
-                        Identity = $Request.Query.Identity
+                        Identity = $Identity
                     }
                 }
                 $SuccessMessage = 'Mailbox restore request resumed successfully'
             }
             'Suspend' {
                 $ExoRequest = @{
-                    tenantid  = $Request.Query.TenantFilter
+                    tenantid  = $TenantFilter
                     cmdlet    = 'Suspend-MailboxRestoreRequest'
                     cmdParams = @{
-                        Identity = $Request.Query.Identity
+                        Identity = $Identity
                     }
                 }
                 $SuccessMessage = 'Mailbox restore request suspended successfully'
             }
             default {
-                $TenantFilter = $Request.Body.TenantFilter
                 $RequestName = $Request.Body.RequestName
                 $SourceMailbox = $Request.Body.SourceMailbox.value ?? $Request.Body.SourceMailbox
                 $TargetMailbox = $Request.Body.TargetMailbox.value ?? $Request.Body.TargetMailbox
@@ -123,7 +121,6 @@ function Invoke-ExecMailboxRestore {
             colour         = 'danger'
         }
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $Body

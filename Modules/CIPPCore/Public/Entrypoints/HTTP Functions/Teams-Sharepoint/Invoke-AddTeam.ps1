@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddTeam {
     <#
     .FUNCTIONALITY
@@ -55,7 +53,6 @@ Function Invoke-AddTeam {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ Results = $Message }

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecListBackup {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ function Invoke-ExecListBackup {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $Type = $Request.Query.Type
     $TenantFilter = $Request.Query.tenantFilter
     $NameOnly = $Request.Query.NameOnly

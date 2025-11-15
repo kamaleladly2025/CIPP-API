@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListDefenderState {
     <#
     .FUNCTIONALITY
@@ -9,10 +7,6 @@ Function Invoke-ListDefenderState {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
     $StatusCode = [HttpStatusCode]::OK
 
 
@@ -27,7 +21,6 @@ Function Invoke-ListDefenderState {
         $StatusCode = [HttpStatusCode]::Forbidden
         $GraphRequest = "$($ErrorMessage)"
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($GraphRequest)

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecExtensionMapping {
   <#
     .FUNCTIONALITY
@@ -118,7 +116,6 @@ Function Invoke-ExecExtensionMapping {
     $StatusCode = [HttpStatusCode]::InternalServerError
   }
 
-  # Associate values to output bindings by calling 'Push-OutputBinding'.
   return ([HttpResponseContext]@{
       StatusCode = $StatusCode
       Body       = $Result

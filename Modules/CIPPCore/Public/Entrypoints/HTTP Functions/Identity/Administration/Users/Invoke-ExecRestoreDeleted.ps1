@@ -1,6 +1,4 @@
-using namespace System.Net
-
-Function Invoke-ExecRestoreDeleted {
+function Invoke-ExecRestoreDeleted {
     <#
     .FUNCTIONALITY
         Entrypoint
@@ -21,7 +19,7 @@ Function Invoke-ExecRestoreDeleted {
     $DisplayName = $Request.Body.displayName
 
     try {
-        $null = New-GraphPostRequest -uri "https://graph.microsoft.com/v1.0/directory/deletedItems/$($RequestID)/restore" -tenantid $TenantFilter -type POST -body '{}' -Verbose
+        $null = New-GraphPostRequest -uri "https://graph.microsoft.com/beta/directory/deletedItems/$($RequestID)/restore" -tenantid $TenantFilter -type POST -body '{}' -Verbose
         $Result = "Successfully restored deleted item with ID: '$($RequestID)'"
         if ($UserPrincipalName) { $Result += " User Principal Name: '$($UserPrincipalName)'" }
         if ($DisplayName) { $Result += " Display Name: '$($DisplayName)'" }
@@ -39,7 +37,6 @@ Function Invoke-ExecRestoreDeleted {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

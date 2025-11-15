@@ -1,6 +1,4 @@
-using namespace System.Net
-
-Function Invoke-ListConnectionFilter {
+function Invoke-ListConnectionFilter {
     <#
     .FUNCTIONALITY
         Entrypoint
@@ -9,14 +7,10 @@ Function Invoke-ListConnectionFilter {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-    $Tenantfilter = $request.Query.tenantfilter
+    $TenantFilter = $request.Query.tenantFilter
 
     try {
-        $Policies = New-ExoRequest -tenantid $Tenantfilter -cmdlet 'Get-HostedConnectionFilterPolicy' | Select-Object * -ExcludeProperty *odata*, *data.type*
+        $Policies = New-ExoRequest -tenantid $TenantFilter -cmdlet 'Get-HostedConnectionFilterPolicy' | Select-Object * -ExcludeProperty *odata*, *data.type*
         $StatusCode = [HttpStatusCode]::OK
     } catch {
         $ErrorMessage = Get-NormalizedError -Message $_.Exception.Message
@@ -24,7 +18,6 @@ Function Invoke-ListConnectionFilter {
         $Policies = $ErrorMessage
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($Policies)

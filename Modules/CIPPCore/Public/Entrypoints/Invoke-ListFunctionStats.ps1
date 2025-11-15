@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListFunctionStats {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ function Invoke-ListFunctionStats {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     try {
         $TenantFilter = $Request.Query.tenantFilter
         $PartitionKey = $Request.Query.FunctionType

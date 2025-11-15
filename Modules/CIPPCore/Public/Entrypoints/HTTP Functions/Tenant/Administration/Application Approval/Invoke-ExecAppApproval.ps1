@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecAppApproval {
     <#
     .FUNCTIONALITY
@@ -9,12 +7,6 @@ function Invoke-ExecAppApproval {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
-
     # Seems to be an unused endpoint? -Bobby
 
     $ApplicationId = if ($Request.Query.ApplicationId) { $Request.Query.ApplicationId } else { $env:ApplicationID }
@@ -25,7 +17,6 @@ function Invoke-ExecAppApproval {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Results

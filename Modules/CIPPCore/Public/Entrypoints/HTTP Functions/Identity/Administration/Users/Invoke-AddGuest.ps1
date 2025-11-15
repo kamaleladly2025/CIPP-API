@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddGuest {
     <#
     .FUNCTIONALITY
@@ -50,7 +48,6 @@ Function Invoke-AddGuest {
         $StatusCode = [HttpStatusCode]::BadRequest
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ 'Results' = @($Result) }

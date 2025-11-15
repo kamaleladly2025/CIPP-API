@@ -1,4 +1,3 @@
-using namespace System.Net
 function Invoke-PublicWebhooks {
     <#
     .FUNCTIONALITY
@@ -7,8 +6,6 @@ function Invoke-PublicWebhooks {
         Public
     #>
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
 
@@ -82,7 +79,6 @@ function Invoke-PublicWebhooks {
         $StatusCode = [HttpStatusCode]::Forbidden
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $Body

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecOneDriveShortCut {
     <#
     .FUNCTIONALITY
@@ -9,8 +7,6 @@ Function Invoke-ExecOneDriveShortCut {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
 
@@ -28,7 +24,6 @@ Function Invoke-ExecOneDriveShortCut {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

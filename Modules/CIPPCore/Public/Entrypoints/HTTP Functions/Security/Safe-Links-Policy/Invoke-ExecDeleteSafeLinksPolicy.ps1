@@ -1,4 +1,3 @@
-using namespace System.Net
 function Invoke-ExecDeleteSafeLinksPolicy {
     <#
     .FUNCTIONALITY
@@ -86,7 +85,6 @@ function Invoke-ExecDeleteSafeLinksPolicy {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{Results = $Result }

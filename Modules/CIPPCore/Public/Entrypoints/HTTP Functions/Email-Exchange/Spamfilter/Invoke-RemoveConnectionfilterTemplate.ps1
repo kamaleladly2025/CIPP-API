@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-RemoveConnectionfilterTemplate {
     <#
     .FUNCTIONALITY
@@ -31,7 +29,6 @@ Function Invoke-RemoveConnectionfilterTemplate {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

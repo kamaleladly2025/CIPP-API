@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecCopyForSent {
     <#
     .FUNCTIONALITY
@@ -28,7 +26,6 @@ Function Invoke-ExecCopyForSent {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ 'Results' = $Result }

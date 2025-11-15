@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListTenantDetails {
     <#
     .FUNCTIONALITY
@@ -37,7 +35,6 @@ Function Invoke-ListTenantDetails {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $org

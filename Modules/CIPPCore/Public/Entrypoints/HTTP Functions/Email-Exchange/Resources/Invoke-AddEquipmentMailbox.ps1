@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddEquipmentMailbox {
     <#
     .FUNCTIONALITY
@@ -53,7 +51,6 @@ Function Invoke-AddEquipmentMailbox {
 
     $Body = [pscustomobject]@{ 'Results' = @($Results) }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $Body

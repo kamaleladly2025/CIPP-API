@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListOoO {
     <#
     .FUNCTIONALITY
@@ -24,7 +22,6 @@ Function Invoke-ListOoO {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $Results

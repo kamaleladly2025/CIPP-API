@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-EditTenant {
     <#
     .FUNCTIONALITY
@@ -67,6 +65,24 @@ function Invoke-EditTenant {
                 Remove-AzDataTableEntity @GroupMembersTable -Entity $Group
             }
         }
+        $DomainBasedEntries = Get-CIPPAzDataTableEntity @GroupMembersTable -Filter "customerId eq '$($Tenant.defaultDomainName)'"
+            if ($DomainBasedEntries) {
+                foreach ($Entry in $DomainBasedEntries) {
+                    try {
+                        # Add corrected GUID-based entry using the actual GUID
+                        $NewEntry = @{
+                            PartitionKey = 'Member'
+                            RowKey       = '{0}-{1}' -f $Entry.GroupId, $Tenant.customerId
+                            GroupId      = $Entry.GroupId
+                            customerId   = $Tenant.customerId
+                        }
+                        Add-CIPPAzDataTableEntity @GroupMembersTable -Entity $NewEntry -Force
+                        Remove-AzDataTableEntity @GroupMembersTable -Entity $Entry
+                    } catch {
+                        Write-Host "Error migrating entry: $($_.Exception.Message)"
+                    }
+                }
+            }
 
         $response = @{
             state      = 'success'

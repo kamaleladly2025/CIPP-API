@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecResetPass {
     <#
     .FUNCTIONALITY
@@ -30,7 +28,6 @@ Function Invoke-ExecResetPass {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

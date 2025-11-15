@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListUserSigninLogs {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListUserSigninLogs {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $top = $Request.Query.top ? $Request.Query.top : 50
 
 
@@ -31,7 +24,6 @@ Function Invoke-ListUserSigninLogs {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($Result)

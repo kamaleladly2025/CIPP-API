@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListBPA {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListBPA {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $TenantFilter = $Request.Query.tenantFilter
     $Table = Get-CippTable 'cachebpav2'
@@ -100,7 +93,6 @@ Function Invoke-ListBPA {
         }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = (ConvertTo-Json -Depth 15 -InputObject $Results)

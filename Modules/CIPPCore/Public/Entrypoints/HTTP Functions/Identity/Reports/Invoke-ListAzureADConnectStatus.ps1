@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListAzureADConnectStatus {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListAzureADConnectStatus {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $TenantFilter = $Request.Query.TenantFilter
     $DataToReturn = $Request.Query.DataToReturn
     Write-Host "DataToReturn: $DataToReturn"

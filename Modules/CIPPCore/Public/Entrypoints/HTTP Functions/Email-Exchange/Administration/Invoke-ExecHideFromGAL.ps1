@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecHideFromGAL {
     <#
     .FUNCTIONALITY
@@ -29,7 +27,6 @@ Function Invoke-ExecHideFromGAL {
         $Result = $_.Exception.Message
         $StatusCode = [HttpStatusCode]::Forbidden
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ 'Results' = $Result }

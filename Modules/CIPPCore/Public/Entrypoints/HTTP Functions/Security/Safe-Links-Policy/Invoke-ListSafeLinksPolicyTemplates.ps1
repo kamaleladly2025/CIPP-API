@@ -1,4 +1,3 @@
-using namespace System.Net
 Function Invoke-ListSafeLinksPolicyTemplates {
     <#
     .FUNCTIONALITY
@@ -8,9 +7,6 @@ Function Invoke-ListSafeLinksPolicyTemplates {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
     $Table = Get-CippTable -tablename 'templates'
     $Templates = Get-ChildItem 'Config\*.SafeLinksTemplate.json' | ForEach-Object {
         $Entity = @{
@@ -31,7 +27,6 @@ Function Invoke-ListSafeLinksPolicyTemplates {
         $data
     }
     if ($Request.query.ID) { $Templates = $Templates | Where-Object -Property RowKey -EQ $Request.query.id }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @($Templates)

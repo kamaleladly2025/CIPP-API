@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecGraphExplorerPreset {
     <#
     .FUNCTIONALITY
@@ -9,8 +7,6 @@ function Invoke-ExecGraphExplorerPreset {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
     $Headers = $Request.Headers
 
     $Username = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Headers.'x-ms-client-principal')) | ConvertFrom-Json).userDetails
@@ -110,7 +106,6 @@ function Invoke-ExecGraphExplorerPreset {
         $Message = $_.Exception.Message
         $StatusCode = [HttpStatusCode]::BadRequest
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{

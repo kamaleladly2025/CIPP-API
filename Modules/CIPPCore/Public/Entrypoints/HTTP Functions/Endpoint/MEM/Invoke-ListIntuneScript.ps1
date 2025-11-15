@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListIntuneScript {
     <#
     .FUNCTIONALITY
@@ -73,7 +71,6 @@ function Invoke-ListIntuneScript {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @($Results)

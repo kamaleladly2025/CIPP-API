@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecCPVPermissions {
     <#
     .FUNCTIONALITY
@@ -9,10 +7,6 @@ function Invoke-ExecCPVPermissions {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
     $TenantFilter = $Request.Body.tenantFilter
 
     $Tenant = Get-Tenants -TenantFilter $TenantFilter -IncludeErrors
@@ -54,7 +48,6 @@ function Invoke-ExecCPVPermissions {
         $GraphRequest = 'Tenant not found'
         $Success = $false
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @{

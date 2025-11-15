@@ -8,7 +8,7 @@ function Invoke-CIPPStandardSpamFilterPolicy {
         (Label) Default Spam Filter Policy
     .DESCRIPTION
         (Helptext) This standard creates a Spam filter policy similar to the default strict policy.
-        (DocsDescription) This standard creates a Spam filter policy similar to the default strict policy.
+        (DocsDescription) This standard creates a Spam filter policy similar to the default strict policy, the following settings are configured to on by default: IncreaseScoreWithNumericIps, IncreaseScoreWithRedirectToOtherPort, MarkAsSpamEmptyMessages, MarkAsSpamJavaScriptInHtml, MarkAsSpamSpfRecordHardFail, MarkAsSpamFromAddressAuthFail, MarkAsSpamNdrBackscatter, MarkAsSpamBulkMail, InlineSafetyTipsEnabled, PhishZapEnabled, SpamZapEnabled
     .NOTES
         CAT
             Defender Standards
@@ -58,7 +58,8 @@ function Invoke-CIPPStandardSpamFilterPolicy {
         return $true
     } #we're done.
 
-    $PolicyName = 'CIPP Default Spam Filter Policy'
+    # Use custom name if provided, otherwise use default for backward compatibility
+    $PolicyName = if ($Settings.name) { $Settings.name } else { 'CIPP Default Spam Filter Policy' }
 
     try {
         $CurrentState = New-ExoRequest -TenantId $Tenant -cmdlet 'Get-HostedContentFilterPolicy' |

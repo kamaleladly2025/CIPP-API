@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecDnsConfig {
     <#
     .FUNCTIONALITY
@@ -11,9 +9,6 @@ Function Invoke-ExecDnsConfig {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # List of supported resolvers
     $ValidResolvers = @(
         'Google'
@@ -106,7 +101,6 @@ Function Invoke-ExecDnsConfig {
         $StatusCode = [HttpStatusCode]::BadRequest
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $body

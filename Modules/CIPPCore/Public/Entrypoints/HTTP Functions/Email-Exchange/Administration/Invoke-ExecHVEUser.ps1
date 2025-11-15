@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecHVEUser {
     <#
     .FUNCTIONALITY
@@ -100,7 +98,6 @@ function Invoke-ExecHVEUser {
         $StatusCode = [HttpStatusCode]::Forbidden
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ Results = @($Results) }

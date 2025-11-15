@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListGDAPInvite {
     <#
     .FUNCTIONALITY
@@ -9,12 +7,6 @@ Function Invoke-ListGDAPInvite {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
-
     # Interact with query parameters or the body of the request.
     $RelationshipId = $Request.Query.RelationshipId
 
@@ -27,7 +19,6 @@ Function Invoke-ListGDAPInvite {
             $_
         }
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @($Invite)

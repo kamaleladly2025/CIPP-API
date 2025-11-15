@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecSetSecurityAlert {
     <#
     .FUNCTIONALITY
@@ -34,7 +32,6 @@ Function Invoke-ExecSetSecurityAlert {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{Results = $Result }

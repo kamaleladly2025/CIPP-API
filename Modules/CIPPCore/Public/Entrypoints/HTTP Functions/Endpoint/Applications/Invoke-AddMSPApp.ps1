@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddMSPApp {
     <#
     .FUNCTIONALITY
@@ -87,7 +85,6 @@ function Invoke-AddMSPApp {
 
 
     $body = [PSCustomObject]@{'Results' = $Results }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $body

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListBreachesAccount {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListBreachesAccount {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $Account = $Request.Query.account
 
@@ -23,7 +16,6 @@ Function Invoke-ListBreachesAccount {
         $Results = Get-BreachInfo -Domain $Account
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return [HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @($results)

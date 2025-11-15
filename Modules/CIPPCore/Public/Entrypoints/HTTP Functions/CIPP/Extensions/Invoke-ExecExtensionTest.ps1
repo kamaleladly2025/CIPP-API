@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecExtensionTest {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ExecExtensionTest {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $Table = Get-CIPPTable -TableName Extensionsconfig
     $Configuration = ((Get-CIPPAzDataTableEntity @Table).config | ConvertFrom-Json)
     # Interact with query parameters or the body of the request.
@@ -101,7 +94,6 @@ Function Invoke-ExecExtensionTest {
         $Results = [pscustomobject]@{'Results' = "Failed to connect: $($_.Exception.Message). Line $($_.InvocationInfo.ScriptLineNumber)" }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Results

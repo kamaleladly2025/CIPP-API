@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecExtensionSync {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ExecExtensionSync {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     switch ($Request.Query.Extension) {
         'Gradient' {
             try {
@@ -93,7 +86,7 @@ Function Invoke-ExecExtensionSync {
             }
         }
         'Hudu' {
-            Register-CIPPExtensionScheduledTasks -Reschedule
+            Register-CIPPExtensionScheduledTasks -Reschedule -Extensions 'Hudu'
             $Results = [pscustomobject]@{'Results' = 'Extension sync tasks have been rescheduled and will start within 15 minutes' }
         }
 

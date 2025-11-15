@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ExecSendPush {
     <#
     .FUNCTIONALITY
@@ -11,9 +9,6 @@ function Invoke-ExecSendPush {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $TenantFilter = $Request.body.TenantFilter
     $UserEmail = $Request.body.UserEmail
     $MFAAppID = '981f26a1-7f43-403b-a875-f8b09b8cd720'

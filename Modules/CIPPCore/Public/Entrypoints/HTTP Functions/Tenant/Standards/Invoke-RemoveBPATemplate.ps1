@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-RemoveBPATemplate {
     <#
     .FUNCTIONALITY
@@ -32,7 +30,6 @@ Function Invoke-RemoveBPATemplate {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

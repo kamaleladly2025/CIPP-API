@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListDomains {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListDomains {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $TenantFilter = $Request.Query.tenantFilter
 
@@ -24,7 +17,6 @@ Function Invoke-ListDomains {
         $Result = Get-NormalizedError -Message $_.Exception.Message
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @($Result)

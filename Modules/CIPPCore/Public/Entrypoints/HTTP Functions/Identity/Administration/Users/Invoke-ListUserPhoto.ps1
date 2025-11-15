@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ListUserPhoto {
     <#
     .FUNCTIONALITY
@@ -9,11 +7,6 @@ Function Invoke-ListUserPhoto {
     #>
     [CmdletBinding()]
     param($Request, $TriggerMetadata)
-
-    $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     # Interact with query parameters or the body of the request.
     $tenantFilter = $Request.Query.tenantFilter
     $userId = $Request.Query.UserID
@@ -32,7 +25,6 @@ Function Invoke-ListUserPhoto {
     #convert body from base64 to byte array
     $Body = [Convert]::FromBase64String($ImageData.body)
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode  = [HttpStatusCode]::OK
             ContentType = $ImageData.headers.'Content-Type'

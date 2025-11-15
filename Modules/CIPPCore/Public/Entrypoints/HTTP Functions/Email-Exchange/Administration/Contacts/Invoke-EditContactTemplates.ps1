@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-EditContactTemplates {
     <#
     .FUNCTIONALITY
@@ -76,7 +74,6 @@ Function Invoke-EditContactTemplates {
         $StatusCode = [HttpStatusCode]::Forbidden
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = $body

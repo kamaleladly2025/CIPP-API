@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecRevokeSessions {
     <#
     .FUNCTIONALITY
@@ -27,7 +25,6 @@ Function Invoke-ExecRevokeSessions {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = $Result }

@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-RemoveQueuedAlert {
     <#
     .FUNCTIONALITY
@@ -39,7 +37,6 @@ Function Invoke-RemoveQueuedAlert {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{ 'Results' = $Result }

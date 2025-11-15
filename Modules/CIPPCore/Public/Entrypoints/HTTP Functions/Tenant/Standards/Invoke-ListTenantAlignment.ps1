@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-ListTenantAlignment {
     <#
     .FUNCTIONALITY
@@ -11,8 +9,6 @@ function Invoke-ListTenantAlignment {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
     try {
         # Use the new Get-CIPPTenantAlignment function to get alignment data
         $AlignmentData = Get-CIPPTenantAlignment

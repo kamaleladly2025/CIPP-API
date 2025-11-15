@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecGetLocalAdminPassword {
     <#
     .FUNCTIONALITY
@@ -22,7 +20,6 @@ Function Invoke-ExecGetLocalAdminPassword {
 
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Body

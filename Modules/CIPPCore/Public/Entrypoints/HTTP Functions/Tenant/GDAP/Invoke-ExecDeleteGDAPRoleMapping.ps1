@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-ExecDeleteGDAPRoleMapping {
     <#
     .FUNCTIONALITY
@@ -28,7 +26,6 @@ Function Invoke-ExecDeleteGDAPRoleMapping {
         $Results = [pscustomobject]@{'Results' = "Failed. $($_.Exception.Message)" }
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $Results

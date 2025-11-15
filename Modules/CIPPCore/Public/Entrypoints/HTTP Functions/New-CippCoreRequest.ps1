@@ -1,3 +1,5 @@
+using namespace System.Net
+using namespace Microsoft.Azure.Functions.PowerShellWorker
 function New-CippCoreRequest {
     <#
     .SYNOPSIS
@@ -19,6 +21,9 @@ function New-CippCoreRequest {
     }
 
     if ($PSCmdlet.ShouldProcess("Processing request for $($Request.Params.CIPPEndpoint)")) {
+        # Set script scope variables for Graph API to indicate HTTP request/high priority
+        $script:XMsThrottlePriority = 'high'
+
         if ((Get-Command -Name $FunctionName -ErrorAction SilentlyContinue) -or $FunctionName -eq 'Invoke-Me') {
             try {
                 $Access = Test-CIPPAccess -Request $Request
@@ -38,8 +43,24 @@ function New-CippCoreRequest {
                 Write-LogMessage -headers $Headers -API $Request.Params.CIPPEndpoint -message 'Accessed this API' -Sev 'Debug'
                 if ($Access) {
                     $Response = & $FunctionName @HttpTrigger
-                    if ($Response.StatusCode) {
-                        return ([HttpResponseContext]$Response)
+                    # Filter to only return HttpResponseContext objects
+                    $HttpResponse = $Response | Where-Object { $_.PSObject.TypeNames -eq 'Microsoft.Azure.Functions.PowerShellWorker.HttpResponseContext' }
+                    if ($HttpResponse) {
+                        # Return the first valid HttpResponseContext found
+                        return ([HttpResponseContext]($HttpResponse | Select-Object -First 1))
+                    } else {
+                        # If no valid response context found, create a default success response
+                        if ($Response.PSObject.Properties.Name -contains 'StatusCode' -and $Response.PSObject.Properties.Name -contains 'Body') {
+                            return ([HttpResponseContext]@{
+                                    StatusCode = $Response.StatusCode
+                                    Body       = $Response.Body
+                                })
+                        } else {
+                            return ([HttpResponseContext]@{
+                                    StatusCode = [HttpStatusCode]::OK
+                                    Body       = $Response
+                                })
+                        }
                     }
                 }
             } catch {

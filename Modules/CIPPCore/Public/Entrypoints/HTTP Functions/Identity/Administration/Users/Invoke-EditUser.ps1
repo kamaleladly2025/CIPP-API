@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-EditUser {
     <#
     .FUNCTIONALITY
@@ -126,12 +124,12 @@ function Invoke-EditUser {
                     $Results.Add( 'Success. User license is already correct.' )
                 } else {
                     if ($UserObj.removeLicenses) {
-                        $licResults = Set-CIPPUserLicense -UserId $UserObj.id -TenantFilter $UserObj.tenantFilter -RemoveLicenses $CurrentLicenses.assignedLicenses.skuId -Headers $Headers
+                        $licResults = Set-CIPPUserLicense -UserId $UserObj.id -TenantFilter $UserObj.tenantFilter -RemoveLicenses $CurrentLicenses.assignedLicenses.skuId -Headers $Headers -APIName $APIName
                         $Results.Add($licResults)
                     } else {
                         #Remove all objects from $CurrentLicenses.assignedLicenses.skuId that are in $licenses
                         $RemoveLicenses = $CurrentLicenses.assignedLicenses.skuId | Where-Object { $_ -notin $licenses }
-                        $licResults = Set-CIPPUserLicense -UserId $UserObj.id -TenantFilter $UserObj.tenantFilter -RemoveLicenses $RemoveLicenses -AddLicenses $licenses -Headers $headers
+                        $licResults = Set-CIPPUserLicense -UserId $UserObj.id -TenantFilter $UserObj.tenantFilter -RemoveLicenses $RemoveLicenses -AddLicenses $licenses -Headers $Headers -APIName $APIName
                         $Results.Add($licResults)
                     }
 
@@ -241,7 +239,6 @@ function Invoke-EditUser {
         $Results.Add($SponsorResult)
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = @{'Results' = @($Results) }

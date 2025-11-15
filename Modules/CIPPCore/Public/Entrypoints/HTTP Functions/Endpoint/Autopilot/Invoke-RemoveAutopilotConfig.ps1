@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-RemoveAutopilotConfig {
     <#
     .FUNCTIONALITY
@@ -48,7 +46,6 @@ function Invoke-RemoveAutopilotConfig {
         $StatusCode = [HttpStatusCode]::InternalServerError
     }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = $StatusCode
             Body       = @{'Results' = "$Result" }

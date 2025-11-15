@@ -1,5 +1,3 @@
-using namespace System.Net
-
 function Invoke-AddNamedLocation {
     <#
     .FUNCTIONALITY
@@ -11,10 +9,6 @@ function Invoke-AddNamedLocation {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
-
     # Input bindings are passed in via param block.
     $Tenants = $request.body.selectedTenants.value
     Write-Host ($Request.body | ConvertTo-Json)
@@ -53,7 +47,6 @@ function Invoke-AddNamedLocation {
 
     $body = [pscustomobject]@{'Results' = @($results) }
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $body

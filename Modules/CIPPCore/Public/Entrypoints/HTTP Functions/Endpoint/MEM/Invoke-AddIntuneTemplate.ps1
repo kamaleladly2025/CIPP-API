@@ -1,5 +1,3 @@
-using namespace System.Net
-
 Function Invoke-AddIntuneTemplate {
     <#
     .FUNCTIONALITY
@@ -11,9 +9,6 @@ Function Invoke-AddIntuneTemplate {
     param($Request, $TriggerMetadata)
 
     $APIName = $Request.Params.CIPPEndpoint
-    $Headers = $Request.Headers
-
-
     $GUID = (New-Guid).GUID
     try {
         if ($Request.Body.RawJSON) {
@@ -69,7 +64,6 @@ Function Invoke-AddIntuneTemplate {
     }
 
 
-    # Associate values to output bindings by calling 'Push-OutputBinding'.
     return ([HttpResponseContext]@{
             StatusCode = [HttpStatusCode]::OK
             Body       = $body
